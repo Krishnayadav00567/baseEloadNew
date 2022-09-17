@@ -11,7 +11,7 @@ export default function CreateMATcode(props) {
     const [denominationOpts, setDenominationOpts] = useState([])
     const [pocketType, setPocketType] = useState([])
     
-    useEffect(() => {
+    useEffect(() => { 
         get_pocket_types();
         // ajaxUtil.sendRequest(`${URLS.LIST_DENOMIATION}`, {}, (response, hasError) => {
         //     if (!hasError && response && response.length)
