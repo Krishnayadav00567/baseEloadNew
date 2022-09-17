@@ -1,0 +1,15 @@
+
+@font-face {
+  font-family: 'ooredoo';
+  src: url('ooredoo-Regular.eot?#iefix') format('embedded-opentype'),  url('ooredoo-Regular.woff') format('woff'), url('ooredoo-Regular.ttf')  format('truetype'), url('ooredoo-Regular.svg#ooredoo-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ooredoo';
+  src: url('ooredoo-Bold.eot?#iefix') format('embedded-opentype'),  url('ooredoo-Bold.woff') format('woff'), url('ooredoo-Bold.ttf')  format('truetype'), url('ooredoo-Bold.svg#ooredoo-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+

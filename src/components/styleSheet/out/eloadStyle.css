@@ -1,0 +1,217 @@
+/* Reports Card Design */
+.reports-box {
+    border: 0.5px solid #D7D7D7;
+    border-radius: 8px;
+    padding: 0px;
+    background-color: #FFFDFD;
+}
+.reports-box-title {
+    padding-left: 20px;
+    border-bottom: 1px solid #E7E7E7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ff1059;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #fff;
+}
+.reports-box-title h5 {
+    margin-bottom: 0px !important;
+}
+.reports-list {
+    padding-left: 20px;
+    border-bottom: 1px solid #E7E7E7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.reports-list p {
+    margin-bottom:  0px !important;
+    color: #2B2B2B !important;
+    font-size: 12px;
+}
+.reports-box a {
+    color: #2B2B2B !important;
+    text-decoration: none;
+    
+}
+/* On Hover Styles */
+/* .reports-box:hover .reports-box-title {
+    background-color: #ff1059;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #fff;
+} */
+.reports-box:hover {
+    background-color: #FFFDFD;
+    border: 0.5px solid #F9F9F9;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,0.08);
+    border-radius: 8px;
+}
+.reports-list:hover {
+    background-color: rgba(255,16,89,0.02);
+}
+.no-reports-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.2;
+    color: #333232;
+    letter-spacing: 0;
+    line-height: 17px;
+}
+/* Reports Card Design End*/
+/* Button Disable */
+.title-card-btn-disabled {
+    border-color: #868e96 !important;
+    cursor: no-drop !important
+}
+
+.eloadProfile-more-details{
+    padding: 10px 20px;
+    border: 1px solid #9999993d;
+
+}
+.captcha-div{
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.captcha-span-padding{
+padding: 10px;
+}
+.captcha-span-text{
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: rgb(27 26 26 / 10%);
+    z-index: 1;
+    text-decoration: line-through;
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+}
+.captcha-input{
+    border: 1px solid #e6e6e6 !important;
+    display: inline;
+    width: 25%;
+    text-align: center;
+    font-size: 20px !important;
+}
+#captchaInputId:focus {
+    border: 1px solid #e6e6e6 !important;
+}
+.lop-success{
+    border: 1px solid #28a745;
+    padding: 15px;
+    border-radius: 2px;
+}
+
+.Toastify__toast-container{
+    z-index: 99999 !important;
+}
+.react-contextmenu
+{
+height: 421px;
+overflow: auto;
+}
+/*Validate mdn button css */
+.validate-mdn-button {
+    border-radius: 8px;
+    border: 1px solid lightgray;
+    background: white;
+    position: absolute;
+    right: 10%;
+    /* bottom: 29%; */
+    top: 32px;
+}
+.mdn-success-failure-icon {
+    position: absolute;
+    right: 25%;
+    top: 38px;
+    /* z-index: 999; */
+    font-size: 14px;
+}
+.mdn-success-failure-icon-blacklist-mdn {
+    position: absolute;
+    right: 30%;
+    top: 38px;
+    /* z-index: 999; */
+    font-size: 14px;
+}
+.otpExpiryTime {
+    font-size: 14px;
+    font-weight: 600;
+    color: #808080c4;
+}
+
+/*Products onscroll dropdown in merchant product mapping menu*/
+.css-yk16xz-control {
+	border-top: 1px solid #999999 !important;
+    border-right: 1px solid #999999 !important;
+    border-bottom: 1px solid #999999 !important;
+	border-radius: 6px !important;
+	border-left: 3px solid #F52323!important;
+    /* outline: unset !important; */
+    /* box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 20%) !important; */
+}
+
+.css-1pahdxg-control {
+    border-color: #999999 !important;
+    border-left: 3px solid #F52323!important;
+}
+.css-1pahdxg-control:hover {
+    box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 20%) !important
+}
+.refersh-dataTable{
+    font-size: 14px;
+    margin-left: 5px !important;
+    padding: .25rem .5rem;
+}
+.login-details-width{
+    max-width: 120px;
+}
+.merchant-product-filter-container .css-yk16xz-control {
+	border: 1px solid #999999 !important;
+    outline: none !important;
+} 
+.merchant-product-filter-container .css-1pahdxg-control {
+    border-color: #999999 !important;
+    border-left: 1px solid #999999!important;
+}
+
+/* change password username and msisdn text field left padding */
+.pad-left {
+    padding-left: 12px !important;
+}
+
+/*Pockets tab Balance Details */
+.wallet-label {
+    font-size: 12px;
+    color: #656565;
+    font-weight: 500;
+}
+.wallet-value {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: bold;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.user-container .dropdown-item{
+    cursor: pointer;
+}
+.scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color: rgb(122,122,122) rgb(204,204,204);
+}
+
+/* Header -> My profile -> Change pwd and change pin alignment fixes */
+.pad-right {
+    padding-right: 3px;
+}
+.pad-18 {
+    padding: 0px 18px 0 0;
+}

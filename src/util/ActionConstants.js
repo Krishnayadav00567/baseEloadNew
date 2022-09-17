@@ -1,0 +1,15 @@
+export const LOGIN = "login";
+export const LOGOUT = "logout";
+export const VALIDATE = "validate";
+export const CHANGE_PSWD = "changePswd";
+export const SET_LOADING = "set_loading";
+export const SET_TOAST_NOTIF = "set_toast_notif";
+export const SET_MODAL_POPUP = "set_modal_popup";
+export const SET_HEADER = "set_header";
+export const SET_BREAD_CRUMB = "set_breadcrumb";
+export const SAVE_STATE = 'save_state';
+export const ADD_TO_NOTIFICATION = 'add_to_notification';
+export const REMOVE_FROM_NOTIFICATION = 'remove_from_notification';
+export const CLEAR_ALL_NOTIFICATION="clear_all_notification";
+export const CLEAR_MSG='clear_msg';
+export const LOGIN_OTP="login_with_otp";

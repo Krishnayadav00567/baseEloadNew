@@ -1,0 +1,109 @@
+.login-form-container {
+    max-width: 465px;
+    right: 50%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 15px 15px 20px 0 rgba(0,0,0,0.05); */
+    border-radius: 6px;
+}
+
+.login-form-header {
+    height: 60px;
+    font-size: 18px;
+    line-height: 60px;
+    padding-left: 40px;
+    border-bottom: 1px solid #D6D6D6;
+}
+
+.login-form {
+    padding: 30px 40px 0px;
+}
+
+.login-form .input-group {
+    border-bottom: 1px solid #D6D6D6;
+}
+
+.login-form label {
+    color: #7E91A4;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.login-form input {
+    border: none;
+    padding-left: 0;
+}
+
+.login-form input:focus {
+    border: none !important;
+    box-shadow: none;
+}
+.text-ellipsis-loading:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+    animation: ellipsis steps(4,end) 900ms infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+    width: 0px;
+  }
+  
+  @keyframes ellipsis {
+    to {
+      width: 20px;    
+    }
+  }
+  
+  @-webkit-keyframes ellipsis {
+    to {
+      width: 20px;    
+    }
+  }
+
+.login-form .mdi {
+    font-size: 25px;
+    color: #A3B4BC;
+}
+
+.login-form-footer {
+    font-size: 12px;
+}
+
+.login-form-footer a {
+    color: #33495F;
+}
+
+.logo-container>img,
+.logo-container>span{
+    position: absolute;
+    padding-bottom: 20px;
+    bottom: 0;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.position-center-v {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+/* main css */
+.menu-col {
+    flex: 0 0 215px;
+    background-color: #ffffff;
+    transition: 0.2s margin;
+    z-index: 10;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.main-col {
+    flex: 1;
+    min-width: 0px;
+    background: rgb(234, 237, 240);
+}
