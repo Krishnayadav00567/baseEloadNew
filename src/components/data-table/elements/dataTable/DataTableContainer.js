@@ -12,7 +12,6 @@ export default class DataTableContainer extends Component {
     
     constructor(props) {
         super(props);
-        console.log(props.privilages,'lop', props.menuPrivilages.create);
         const { tabPriv} = props;
 
         const tabPrivConst = props.menuPrivilages ? {
