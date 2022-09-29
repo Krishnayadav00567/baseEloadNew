@@ -7,7 +7,12 @@ import {
   BUTTON_TYPE,
   BUTTON_SIZE,
 } from "@6d-ui/buttons";
-import { FieldItem, FIELD_TYPES, useFieldItem } from "@6d-ui/fields";
+import {
+  FieldItem,
+  FIELD_TYPES,
+  useFieldItem,
+  validateForm,
+} from "@6d-ui/fields";
 import { FormElements } from "./util/Utils";
 import Form from "./Form";
 
@@ -16,8 +21,17 @@ export default function CreateMATcode(props) {
     props;
   const [denominationOpts, setDenominationOpts] = useState([]);
   const [pocketType, setPocketType] = useState([]);
-  const [formNumber, setFormNumber] = useState(0);
+  const [formNumber, setFormNumber] = useState(1);
+  const [editVal, setEditVal] = useState(1);
+  const [request, setRequest] = useState([]);
+  const [keeper, setKeeper] = useState({
+    matCode: "",
+    pocketTypeId: "",
+    denomination: "",
+  });
 
+  const [errorList, setErrorList] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   useEffect(() => {
     get_pocket_types();
     // ajaxUtil.sendRequest(`${URLS.LIST_DENOMIATION}`, {}, (response, hasError) => {
@@ -93,24 +107,68 @@ export default function CreateMATcode(props) {
       ];
     }
   }
-  const onCreateClick = () => {
-    if (validateValues(["matCode", "denomination", "pocketTypeId"])) {
-      setNotification({
-        hasError: true,
-        message: "Please enter mandatory fields.",
-      });
+
+  const onChange = (data, value) => {
+    if ((data == "pocketTypeId" || data == "denomination") && value === null) {
       return;
     }
+    if (data == "pocketTypeId" && value && value !== null) {
+      denomination_dropdown(value.value);
+      setKeeper({ ...keeper });
+    }
+    setKeeper(() => {
+      return {
+        ...keeper,
+        [data]: value,
+      };
+    });
+  };
+  const validateFields = (dataobj) => {
+    const err = Object.keys(dataobj).filter((key) => {
+      if (FormElements[key]) {
+        const field = FormElements[key];
+        const validate = validateForm(field.name, dataobj[key], field);
+        if (validate && validate.hasError) {
+          setErrorList({ ...validate });
+          return validate;
+        } else {
+          return null;
+        }
+      }
+    });
+    setErrorMessage([...err]);
+    if (err.length > 0) {
+      return true;
+    } else {
+      setKeeper({});
+      setErrorMessage([]);
+      return false;
+    }
+  };
+  const addToList = () => {
+    setRequest([
+      ...request,
+      {
+        denominationId: keeper?.denomination?.value
+          ? keeper?.denomination?.value
+          : "",
+        matCode: keeper?.matCode || "",
+        pocketId: keeper?.pocketTypeId?.value || "",
+      },
+    ]);
+    setKeeper();
+  };
+  const onCreateClick = (valid) => {
+    addToList();
+    if (valid == "AddMore") {
+      setKeeper({ matCode: "", pocketTypeId: "", denomination: "" });
+      return true;
+    } else {
+    }
+  };
 
-    const request = {
-      denominationId: values.denomination.value
-        ? values.denomination.value
-        : "",
-      matCode: values.matCode,
-      pocketId: values.pocketTypeId.value,
-      // pocketName: values.pocketTypeId.label
-    };
-
+  const confirm = () => {
+    addToList();
     ajaxUtil.sendRequest(
       URLS.CREATE_URL,
       request,
@@ -136,58 +194,21 @@ export default function CreateMATcode(props) {
               align="right"
               label="Add More"
               isButtonGroup={true}
-              onClick={() => setFormNumber(formNumber + 1)}
-            />
-            <CustomButton
-              style={BUTTON_STYLE.BRICK}
-              type={BUTTON_TYPE.SECONDARY}
-              size={BUTTON_SIZE.MEDIUM_LARGE}
-              align="right"
-              label="Cancel"
-              isButtonGroup={true}
-              onClick={() => setFormNumber(formNumber > 0 ? formNumber - 1 : 0)}
+              onClick={() => {
+                if (!validateFields(keeper)) {
+                  if (onCreateClick("AddMore")) {
+                    setFormNumber(formNumber + 1);
+                    setEditVal(1);
+                  }
+                }
+              }}
             />
           </div>
-          <Col md="12" className="channel-type">
-            <FieldItem
-              {...FormElements.matCode}
-              type={FIELD_TYPES.TEXT}
-              value={values.matCode}
-              onChange={(...e) => handleChange("matCode", ...e)}
-              touched={fields.matCode && fields.matCode.hasError}
-              error={fields.matCode && fields.matCode.errorMsg}
-            />
-          </Col>
-          <Col md="12" className="channel-type">
-            <FieldItem
-              {...FormElements.pocketTypeId}
-              value={values.pocketTypeId}
-              values={pocketType}
-              onChange={(...e) =>
-                handleChange(FormElements.pocketTypeId.name, ...e)
-              }
-              type={FIELD_TYPES.DROP_DOWN}
-              touched={fields.pocketTypeId && fields.pocketTypeId.hasError}
-              error={fields.pocketTypeId && fields.pocketTypeId.errorMsg}
-            />
-          </Col>
-          <Col md="12" className="channel-type">
-            <FieldItem
-              {...FormElements.denomination}
-              type={FIELD_TYPES.DROP_DOWN}
-              values={denominationOpts}
-              value={values.denomination ? values.denomination : null}
-              onChange={(...e) => handleChange("denomination", ...e)}
-              touched={fields.denomination && fields.denomination.hasError}
-              error={fields.denomination && fields.denomination.errorMsg}
-            />
-          </Col>
         </Row>
         {formNumber > 0
           ? [...Array(formNumber)].map((value, index) => (
               <Form
                 key={index}
-                onValueChange={onValueChange}
                 values={values}
                 handleChange={handleChange}
                 pocketType={pocketType}
@@ -195,6 +216,17 @@ export default function CreateMATcode(props) {
                 denominationOpts={denominationOpts}
                 setFormNumber={setFormNumber}
                 formNumber={formNumber}
+                setEditVal={setEditVal}
+                index={index}
+                editVal={editVal}
+                request={request}
+                setRequest={setRequest}
+                close={close}
+                onChange={onChange}
+                errorMessage={errorMessage}
+                errorList={errorList}
+                setKeeper={setKeeper}
+                setErrorMessage={setErrorMessage}
               />
             ))
           : null}
@@ -217,7 +249,7 @@ export default function CreateMATcode(props) {
           align="right"
           label="Confirm"
           isButtonGroup={true}
-          onClick={onCreateClick}
+          onClick={() => confirm()}
         />
       </ModalFooter>
     </ModalBody>

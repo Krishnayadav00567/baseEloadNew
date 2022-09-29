@@ -3,71 +3,108 @@ import { ModalBody, ModalFooter, Row, Col } from "reactstrap";
 import { FieldItem, FIELD_TYPES, useFieldItem } from "@6d-ui/fields";
 import { FormElements } from "./util/Utils";
 import {
-    CustomButton,
-    BUTTON_STYLE,
-    BUTTON_TYPE,
-    BUTTON_SIZE,
-  } from "@6d-ui/buttons";
+  CustomButton,
+  BUTTON_STYLE,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+} from "@6d-ui/buttons";
 const Form = (props) => {
-    console.log(props.formNumber);
+  const removeFromArray = () => {
+    const temp = [...props.request];
+    temp.pop();
+    props.setRequest(() => {
+      return [...temp];
+    });
+  };
   return (
     <>
       <div className=" bg-white">
         <Row className="noMargin dataTableFormGroup m-0">
-        <div style={{ margin: "auto", width: "100%", padding: "10px" }}>
-            <CustomButton
-              style={BUTTON_STYLE.BRICK}
-              type={BUTTON_TYPE.SECONDARY}
-              size={BUTTON_SIZE.MEDIUM_LARGE}
-              align="right"
-              label="Cancel"
-              isButtonGroup={true}
-              onClick={()=>props.setFormNumber(props.formNumber-1)}
-            />
+          <div style={{ margin: "auto", width: "100%", padding: "10px" }}>
+            {props.index === props.request.length ? (
+              <CustomButton
+                style={BUTTON_STYLE.BRICK}
+                type={BUTTON_TYPE.SECONDARY}
+                size={BUTTON_SIZE.MEDIUM_LARGE}
+                align="right"
+                label="Cancel"
+                isButtonGroup={true}
+                onClick={() => {
+                  const temp = props.request[props.request.length - 1];
+                  props.setKeeper({ ...temp });
+                  props.setFormNumber(props.formNumber - 1);
+                  props.setErrorMessage();
+                  removeFromArray();
+                  if (props.formNumber == 1) {
+                    props.close();
+                  }
+                }}
+              />
+            ) : null}
           </div>
           <Col md="12" className="channel-type">
             <FieldItem
               {...FormElements.matCode}
               type={FIELD_TYPES.TEXT}
-              value={props.values.matCode}
-              onChange={(...e) => props.handleChange("matCode", ...e)}
-            //   touched={props.fields.matCode && props.fields.matCode.hasError}
-            //   error={props.fields.matCode && props.fields.matCode.errorMsg}
+              disabled={props.index < props.request.length}
+              value={props.request[props.index]?.matCode}
+              onChange={(...e) => props.onChange("matCode", ...e)}
+              touched={
+                props.index == props.request.length &&
+                props.errorMessage?.some((key) => key == "matCode") &&
+                props.errorList.hasError
+              }
+              error={
+                props.index == props.request.length &&
+                props.errorMessage?.some((key) => key == "matCode") &&
+                props.errorList.errorMsg
+              }
             />
           </Col>
           <Col md="12" className="channel-type">
             <FieldItem
               {...FormElements.pocketTypeId}
-              value={props.values.pocketTypeId}
+              value={props.request[props.index]?.pocketTypeId}
               values={props.pocketType}
+              disabled={props.index < props.request.length}
               onChange={(...e) =>
-                props.handleChange(FormElements.pocketTypeId.name, ...e)
+                props.onChange(FormElements.pocketTypeId.name, ...e)
               }
               type={FIELD_TYPES.DROP_DOWN}
-            //   touched={
-            //     props.fields.pocketTypeId && props.fields.pocketTypeId.hasError
-            //   }
-            //   error={
-            //     props.fields.pocketTypeId && props.fields.pocketTypeId.errorMsg
-            //   }
+              touched={
+                props.index == props.request.length &&
+                props.errorMessage?.some((key) => key == "pocketTypeId") &&
+                props.errorList.hasError
+              }
+              error={
+                props.index == props.request.length &&
+                props.errorMessage?.some((key) => key == "pocketTypeId") &&
+                props.errorList.errorMsg
+              }
             />
           </Col>
           <Col md="12" className="channel-type">
             <FieldItem
               {...FormElements.denomination}
+              disabled={props.index < props.request.length}
               type={FIELD_TYPES.DROP_DOWN}
               values={props.denominationOpts}
               value={
-                props.values.denomination ? props.values.denomination : null
+                props.request[props.index]?.denominationId
+                  ? props.request[props.index]?.denominationId
+                  : ""
               }
-              onChange={(...e) => props.handleChange("denomination", ...e)}
-            //   touched={
-            //     props.fields.denomination &&
-            //     props.props.fields.denomination.hasError
-            //   }
-            //   error={
-            //     props.fields.denomination && props.fields.denomination.errorMsg
-            //   }
+              onChange={(...e) => props.onChange("denomination", ...e)}
+              touched={
+                props.index == props.request.length &&
+                props.errorMessage?.some((key) => key == "denomination") &&
+                props.errorList.hasError
+              }
+              error={
+                props.index == props.request.length &&
+                props.errorMessage?.some((key) => key == "denomination") &&
+                props.errorList.errorMsg
+              }
             />
           </Col>
         </Row>
